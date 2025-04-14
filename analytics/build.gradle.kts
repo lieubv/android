@@ -21,7 +21,10 @@ dependencies {
     implementation(project(":domain"))
 
     // Analytics
-    implementation(lib.mega.analytics)
+    //implementation(lib.mega.analytics)
+    implementation(files("../shared-release.aar"))
+    implementation(files("../analytics-core-release.aar"))
+    implementation(files("../analytics-annotations-release.aar"))
 
     // DI
     implementation(lib.javax.inject)
