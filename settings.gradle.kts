@@ -4,10 +4,10 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-//        maven {
-//            url =
-//                uri("${System.getenv("ARTIFACTORY_BASE_URL")}/artifactory/mega-gradle/megagradle")
-//        }
+        maven {
+            url =
+                uri("${System.getenv("ARTIFACTORY_BASE_URL")}/artifactory/mega-gradle/megagradle")
+        }
     }
 //    resolutionStrategy {
 //        eachPlugin {
