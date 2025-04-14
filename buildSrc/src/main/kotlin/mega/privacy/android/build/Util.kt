@@ -330,5 +330,5 @@ fun getChatGitHash(version: String, project: Project): String {
  *
  * @return false if environment variable "USE_PREBUILT_SDK" is false. Otherwise return true.
  */
-fun shouldUsePrebuiltSdk(): Boolean =
-    System.getenv("USE_PREBUILT_SDK")?.let { it != "false" } ?: true
+fun shouldUsePrebuiltSdk(): Boolean = false
+    //System.getenv("USE_PREBUILT_SDK")?.let { it != "false" } ?: true
