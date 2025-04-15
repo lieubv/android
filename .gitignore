@@ -67,3 +67,4 @@ wget-log
 
 credentials.properties
 .kotlin
+build_log.txt

@@ -47,6 +47,7 @@ if [[ `uname -m` == 'arm64' ]]; then
 else
     NDK_BUILD=${NDK_ROOT}/ndk-build
 fi
+echo "NDK_BUILD = ${NDK_BUILD}"
 
 BASE_PATH=`pwd`
 LIBDIR=${BASE_PATH}/../obj/local/armeabi
@@ -760,6 +761,7 @@ if [ ! -f ${ICU}/${ICU_SOURCE_FILE}.ready ]; then
 
         rm -rf ${ANDROID_TOOLCHAIN} &>> ${LOG_FILE}
         $NDK_ROOT/build/tools/make_standalone_toolchain.py --arch=${ARCH} --api=${API_LEVEL} --install-dir=${ANDROID_TOOLCHAIN} &>> ${LOG_FILE}
+#        $NDK_ROOT/toolchains/llvm/prebuilt/make_standalone_toolchain.py --arch=${ARCH} --api=${API_LEVEL} --install-dir=${ANDROID_TOOLCHAIN} &>> ${LOG_FILE}
 
         CONFIGURE_ANDROID_OPTIONS="--host=${HOST} --enable-static --enable-shared=no --enable-extras=no --enable-strict=no --enable-icuio=no --enable-layout=no --enable-layoutex=no --enable-tools=no --enable-tests=no --enable-samples=no --enable-dyload=no -with-cross-build=$CROSS_BUILD_DIR"
 
