@@ -62,7 +62,8 @@ fi
 
 if [ -z "${LOG_FILE}" ]; then
     # If no build log variable is defined, use below value.
-    LOG_FILE=/dev/null # Ensure you use a full path
+    # LOG_FILE=/dev/null # Ensure you use a full path
+    LOG_FILE=/Users/alex/workspace/mega/megaAndroid/build_log.txt
 fi
 
 CRYPTOPP=cryptopp
@@ -229,8 +230,8 @@ function downloadCheckAndUnpack()
     fi
 
     if [[ "${FILENAME}" =~ \.tar\.[^\.]+$ ]]; then
-        echo "* Extracting TAR file..."
-        tar --overwrite -xf ${FILENAME} -C ${TARGETPATH} &>> ${LOG_FILE}
+        echo "* Extracting TAR file.. to ${TARGETPATH}"
+        tar -xf ${FILENAME} -C ${TARGETPATH} &>> ${LOG_FILE}
     elif [[ "${FILENAME}" =~ \.zip$ ]]; then
         echo "* Extracting ZIP file..."
     	unzip -o ${FILENAME} -d ${TARGETPATH} &>> ${LOG_FILE}
