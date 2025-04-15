@@ -12,7 +12,10 @@ dependencies {
     implementation(project(":domain"))
     implementation(androidx.appcompat)
     implementation(androidx.navigation.compose)
-    implementation(lib.mega.analytics)
+    //implementation(lib.mega.analytics)
+    implementation(files("../shared-release.aar"))
+    implementation(files("../analytics-core-release.aar"))
+    implementation(files("../analytics-annotations-release.aar"))
 
     testImplementation(testlib.bundles.ui.test)
     testImplementation(testlib.bundles.unit.test)
