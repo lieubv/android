@@ -471,8 +471,10 @@ if [ ! -f ${SODIUM}/${SODIUM_SOURCE_FILE}.ready ]; then
     export NDK_PLATFORM=${APP_PLATFORM}
     ./autogen.sh &>> ${LOG_FILE}
     echo "#include <limits.h>" >>  src/libsodium/include/sodium/export.h
-    sed -i 's/enable-minimal/enable-minimal --disable-pie/g' dist-build/android-build.sh
-    
+
+    echo "* Building here"
+    sed -i '' 's/enable-minimal/enable-minimal --disable-pie/g' dist-build/android-build.sh
+
     if [ -n "`echo ${BUILD_ARCHS} | grep -w armeabi-v7a`" ]; then
         echo "* Prebuilding libsodium for ARMv7"
         dist-build/android-armv7-a.sh &>> ${LOG_FILE}
