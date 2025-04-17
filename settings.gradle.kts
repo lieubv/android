@@ -4,23 +4,23 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven {
-            url =
-                uri("${System.getenv("ARTIFACTORY_BASE_URL")}/artifactory/mega-gradle/megagradle")
-        }
+//        maven {
+//            url =
+//                uri("${System.getenv("ARTIFACTORY_BASE_URL")}/artifactory/mega-gradle/megagradle")
+//        }
     }
-    resolutionStrategy {
-        eachPlugin {
-            when (requested.id.id) {
-                "mega.android.release",
-                "mega.android.cicd",
-                "mega.artifactory.publish.convention",
-                -> useModule("mega.privacy:megagradle:${requested.version}")
-
-                else -> {}
-            }
-        }
-    }
+//    resolutionStrategy {
+//        eachPlugin {
+//            when (requested.id.id) {
+//                "mega.android.release",
+//                "mega.android.cicd",
+//                "mega.artifactory.publish.convention",
+//                -> useModule("mega.privacy:megagradle:${requested.version}")
+//
+//                else -> {}
+//            }
+//        }
+//    }
 }
 
 dependencyResolutionManagement {
@@ -79,7 +79,7 @@ buildCache {
     }
 }
 
-fun shouldUsePrebuiltSdk(): Boolean =
-    System.getenv("USE_PREBUILT_SDK")?.let { it != "false" } ?: true
+fun shouldUsePrebuiltSdk(): Boolean = false
+    //System.getenv("USE_PREBUILT_SDK")?.let { it != "false" } ?: true
 
 fun isServerBuild(): Boolean = System.getenv("BUILD_NUMBER") != null

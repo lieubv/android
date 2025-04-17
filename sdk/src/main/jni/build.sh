@@ -47,6 +47,7 @@ if [[ `uname -m` == 'arm64' ]]; then
 else
     NDK_BUILD=${NDK_ROOT}/ndk-build
 fi
+echo "NDK_BUILD = ${NDK_BUILD}"
 
 BASE_PATH=`pwd`
 LIBDIR=${BASE_PATH}/../obj/local/armeabi
@@ -62,7 +63,8 @@ fi
 
 if [ -z "${LOG_FILE}" ]; then
     # If no build log variable is defined, use below value.
-    LOG_FILE=/dev/null # Ensure you use a full path
+    # LOG_FILE=/dev/null # Ensure you use a full path
+    LOG_FILE=/Users/alex/workspace/mega/megaAndroid/build_log.txt
 fi
 
 CRYPTOPP=cryptopp
@@ -229,8 +231,8 @@ function downloadCheckAndUnpack()
     fi
 
     if [[ "${FILENAME}" =~ \.tar\.[^\.]+$ ]]; then
-        echo "* Extracting TAR file..."
-        tar --overwrite -xf ${FILENAME} -C ${TARGETPATH} &>> ${LOG_FILE}
+        echo "* Extracting TAR file.. to ${TARGETPATH}"
+        tar -xf ${FILENAME} -C ${TARGETPATH} &>> ${LOG_FILE}
     elif [[ "${FILENAME}" =~ \.zip$ ]]; then
         echo "* Extracting ZIP file..."
     	unzip -o ${FILENAME} -d ${TARGETPATH} &>> ${LOG_FILE}
@@ -470,8 +472,10 @@ if [ ! -f ${SODIUM}/${SODIUM_SOURCE_FILE}.ready ]; then
     export NDK_PLATFORM=${APP_PLATFORM}
     ./autogen.sh &>> ${LOG_FILE}
     echo "#include <limits.h>" >>  src/libsodium/include/sodium/export.h
-    sed -i 's/enable-minimal/enable-minimal --disable-pie/g' dist-build/android-build.sh
-    
+
+    echo "* Building here"
+    sed -i '' 's/enable-minimal/enable-minimal --disable-pie/g' dist-build/android-build.sh
+
     if [ -n "`echo ${BUILD_ARCHS} | grep -w armeabi-v7a`" ]; then
         echo "* Prebuilding libsodium for ARMv7"
         dist-build/android-armv7-a.sh &>> ${LOG_FILE}
@@ -757,6 +761,7 @@ if [ ! -f ${ICU}/${ICU_SOURCE_FILE}.ready ]; then
 
         rm -rf ${ANDROID_TOOLCHAIN} &>> ${LOG_FILE}
         $NDK_ROOT/build/tools/make_standalone_toolchain.py --arch=${ARCH} --api=${API_LEVEL} --install-dir=${ANDROID_TOOLCHAIN} &>> ${LOG_FILE}
+#        $NDK_ROOT/toolchains/llvm/prebuilt/make_standalone_toolchain.py --arch=${ARCH} --api=${API_LEVEL} --install-dir=${ANDROID_TOOLCHAIN} &>> ${LOG_FILE}
 
         CONFIGURE_ANDROID_OPTIONS="--host=${HOST} --enable-static --enable-shared=no --enable-extras=no --enable-strict=no --enable-icuio=no --enable-layout=no --enable-layoutex=no --enable-tools=no --enable-tests=no --enable-samples=no --enable-dyload=no -with-cross-build=$CROSS_BUILD_DIR"
 

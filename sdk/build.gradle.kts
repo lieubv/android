@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    alias(plugin.plugins.mega.artifactory.publish.convention)
+    //alias(plugin.plugins.mega.artifactory.publish.convention)
 }
 
 android {
@@ -98,22 +98,22 @@ if (!shouldUsePrebuiltSdk() || isServerBuild()) {
     println("SDK_BRANCH = $sdkBranch")
     println("MEGACHAT_BRANCH = $chatBranch")
 
-    megaPublish {
-        repoKey = "mega-sdk-android"
-        groupId = "nz.mega.sdk"
-        artifactId = "sdk"
-        version = sdkVersion() + "-" + sdkLibType()
-        libPath = "${layout.buildDirectory.get()}/outputs/aar/${project.name}-release.aar"
-        sourcePath = "${layout.buildDirectory.get()}/libs/${project.name}-sources.jar"
-        properties = mapOf(
-            "sdk-commit" to sdkCommit,
-            "chat-commit" to chatCommit,
-            "sdk-branch" to sdkBranch,
-            "chat-branch" to chatBranch,
-            "builder" to sdkBuilderName,
-        )
-        dependentTasks = listOf("assembleRelease", "releaseSourcesJar")
-    }
+//    megaPublish {
+//        repoKey = "mega-sdk-android"
+//        groupId = "nz.mega.sdk"
+//        artifactId = "sdk"
+//        version = sdkVersion() + "-" + sdkLibType()
+//        libPath = "${layout.buildDirectory.get()}/outputs/aar/${project.name}-release.aar"
+//        sourcePath = "${layout.buildDirectory.get()}/libs/${project.name}-sources.jar"
+//        properties = mapOf(
+//            "sdk-commit" to sdkCommit,
+//            "chat-commit" to chatCommit,
+//            "sdk-branch" to sdkBranch,
+//            "chat-branch" to chatBranch,
+//            "builder" to sdkBuilderName,
+//        )
+//        dependentTasks = listOf("assembleRelease", "releaseSourcesJar")
+//    }
 }
 
 
